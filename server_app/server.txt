@@ -1,0 +1,5 @@
+%%compilar server
+c(server).
+
+%%ejecutar simple
+server:server(5678).

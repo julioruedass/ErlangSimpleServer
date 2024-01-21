@@ -1,0 +1,11 @@
+%%compilar cliente
+c(client_p).
+
+%%ejecutar simple
+client_p:client(5678).
+client_p:client().
+%%20 repeticiones
+client_p:do_loop().
+
+%% asignar procesoa pid
+pid = echo:client_p:client().
