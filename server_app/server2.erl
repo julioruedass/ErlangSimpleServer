@@ -3,10 +3,10 @@
 -export([start/2]).
 % port =5678
 
-start(1,LPort) ->
+start(2,LPort) ->
     case gen_tcp:listen(LPort,[{active, false},{packet,2}]) of
         {ok, ListenSock} ->
-            %%start_servers(Num,ListenSock),
+            start_servers(2,ListenSock),
             {ok, Port} = inet:port(ListenSock),
             Port;
         {error,Reason} ->

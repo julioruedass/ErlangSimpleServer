@@ -5,7 +5,7 @@ c(client_p).
 client_p:client(5678).
 client_p:client().
 %%20 repeticiones
-client_p:do_loop().
+client_p:do_loop(5678).
 
 %% asignar procesoa pid
 pid = echo:client_p:client().

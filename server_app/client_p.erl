@@ -1,33 +1,33 @@
 -module(client_p).
--export([client/0]).
+-export([client/1]).
 % port =5678
 %%gen_tcp:connect("www.erlang.org", 80, [binary, {packet, 0}]).
 %%gen_tcp:connect("localhost", 5678,   [binary, {packet, 0}]).
 %%gen_tcp:close(Sock)
--export([do_loop/0]).
+-export([do_loop/1]).
 
-do_loop() ->
-    loop(1).
+do_loop(Port) ->
+    loop(1,Port).
 
-loop(10) ->
+loop(10,Port) ->
     io:fwrite("Termino ejecuccion ~n"),
     ok;
 
-loop(Count) ->
+loop(Count,Port) ->
     % do something
     timer:sleep(2000),
     try  
-        client() of
+        client(Port) of
         _ -> ok
     catch   
         _ -> error
     end,
-    io:format("- mensaje ~w ~n", [Count]),
-    loop(Count+1).
+        io:format("- mensaje ~w ~n", [Count]),
+    loop(Count+1,Port).
 
-    client()->     
+    client(Port)->     
         SomeHostInNet = "localhost", % to make it runnable on one machine
-        case gen_tcp:connect(SomeHostInNet, 5678, [{active, false},{packet,2}]) of
+        case gen_tcp:connect(SomeHostInNet, Port, [{active, false},{packet,2}]) of
             {ok,Sock } ->    
                 io:fwrite("Se conecto "),
                 ok =gen_tcp:send(Sock, "Cliente send for 5678"),
